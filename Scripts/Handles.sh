@@ -75,7 +75,7 @@ fi
 if [ -d *"luci-app-mini-diskmanager"* ]; then
 	echo " " && cd ./luci-app-kodexplorer/
 
-	sed -i 's/+php8 \+//' ./luci-app-kodexplorer/Makefile 
+	sed -i 's/+php8 \+//' $(find ./luci-app-kodexplorer/ -type f -name "Makefile") 
 
 	cd $PKG_PATH && echo "KOD has been fixed!"
 fi
