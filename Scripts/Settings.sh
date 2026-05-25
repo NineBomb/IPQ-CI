@@ -56,7 +56,7 @@ fi
 #add
 #更新golang版本
 rm -rf ./feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 25.x ./feeds/packages/lang/golang
+git clone https://github.com/sbwml/packages_lang_golang -b 26.x ./feeds/packages/lang/golang
 
 #修复speedtes-web无法编译缺少依赖问题
 cp /usr/bin/upx ./staging_dir/host/bin/
