@@ -29,6 +29,7 @@ fi
 #修改mini-diskmanager菜单位置
 if [ -d *"luci-app-mini-diskmanager"* ]; then
 	echo " " && cd ./luci-app-mini-diskmanager/
+	ls -l
 
 	sed -i "s/services/system/g" ./luci-app-mini-diskmanager/root/usr/share/luci/menu.d/luci-app-mini-diskmanager.json
 
@@ -78,8 +79,9 @@ fi
 #修复KOD奇怪的依赖问题
 if [ -d *"luci-app-kodexplorer"* ]; then
 	echo " " && cd ./luci-app-kodexplorer/
+	ls -l
 
-	sed -i 's/+php8 \+//' $(find ./luci-app-kodexplorer/ -type f -name "Makefile") 
+	sed -i 's/+php8 \+//' $(find ./ -type f -name "Makefile") 
 
 	cd $PKG_PATH && echo "KOD has been fixed!"
 fi
@@ -95,6 +97,8 @@ cd $PKG_PATH && echo "adg has been fixed!"
 if [ -d *"luci-app-passwall"* ]; then
 	echo " " && cd ./luci-app-passwall/
 
+	ls -l
+
 	sed -i 's/services/vpn/g' $(find ./luci-app-passwall/ -type f -name "*lua")
 
 	cd $PKG_PATH && echo "passwall has been fixed!"
@@ -105,6 +109,8 @@ fi
 if [ -d *"luci-app-alist"* ]; then
 	echo " " && cd ./luci-app-alist/
 
+	ls -l
+
 	sed -i 's/services/nas/g' $(find ./luci-app-alist/ -type f -name "*json")
 
 	cd $PKG_PATH && echo "alist has been fixed!"
@@ -114,6 +120,8 @@ fi
 if [ -d *"luci-app-openlist2"* ]; then
 	echo " " && cd ./luci-app-openlist2/
 
+	ls -l
+
 	sed -i 's/services/nas/g' $(find ./luci-app-openlist2/ -type f -name "*json")
 
 	cd $PKG_PATH && echo "openlist2 has been fixed!"
@@ -122,6 +130,8 @@ fi
 #move qB from Services to NAS
 if [ -d *"luci-app-qbittorrent"* ]; then
 	echo " " && cd ./luci-app-qbittorrent/
+	
+	ls -l
 
 	sed -i 's/services/nas/g' $(find ./luci-app-qbittorrent/ -type f -name "*json")
 
