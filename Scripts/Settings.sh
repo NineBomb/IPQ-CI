@@ -74,7 +74,7 @@ jq 'del(."admin/system/plugins")' ./feeds/luci/modules/luci-mod-system/root/usr/
 sed -i '/config ttyd/,/^config/ s|option command .*/bin/login.*|option command '\''/bin/login root'\''|' ./feeds/packages/utils/ttyd/files/ttyd.config
 
 set -euo pipefail
-TARGET_CSS="./package/op-packages/luci-theme-argon/htdocs/luci-static/argon/css/cascade.css"
+TARGET_CSS="./package/luci-theme-argon/htdocs/luci-static/argon/css/cascade.css"
 TARGET="./feeds/luci/modules/luci-base/htdocs/luci-static/resources/luci.js"
 
 # 定义唯一标识注释，用于检测是否已经添加过补丁
@@ -91,7 +91,7 @@ PATCH_CONTENT=$(cat <<'EOF'
 @keyframes skeleton-pulse{0%{background-position:200% 0}100%{background-position:-200% 0}}
 :root[data-darkmode="true"] .table .tr.placeholder .td,:root[data-darkmode="true"] .cbi-section-table .tr.placeholder .td{background:linear-gradient(90deg,#2a2a2a 25%,#3a3a3a 50%,#2a2a2a 75%) !important;background-size:200% 100% !important}
 @media screen and (min-width:769px){#mainmenu{display:block !important;visibility:visible !important}}
-#mainmenu .nav,#mainmenu .slide-menu{animation:menuFadeIn 0.15s ease-out forwards}
+#mainmenu .nav,#mainmenu .slide-menu{animation:menuFadeIn 0.25s ease-out forwards}
 @keyframes menuFadeIn{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:translateX(0)}}
 .main-left{transition:transform 0.3s cubic-bezier(0.4,0,0.2,1),width 0.3s ease !important;visibility:visible !important;opacity:1 !important}
 .main-left .sidenav-header .brand,.main-left .sidenav-header .brand .logo{transition:color 0.4s ease,opacity 0.4s ease,filter 0.4s ease,transform 0.4s ease !important;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}

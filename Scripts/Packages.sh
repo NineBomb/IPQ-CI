@@ -108,7 +108,7 @@ UPDATE_PACKAGE() {
 #UPDATE_PACKAGE "luci-app-ssr-plus" "fw876/helloworld" "main" "" "ssr-plus helloworld"
 
 # UPDATE_PACKAGE "包名" "项目地址" "项目分支" "pkg/name，可选，pkg为从大杂烩中单独提取包名插件；name为重命名为包名"
-UPDATE_PACKAGE "argon" "sbwml/luci-theme-argon" "openwrt-25.12"
+#UPDATE_PACKAGE "argon" "sbwml/luci-theme-argon" "openwrt-25.12"
 UPDATE_PACKAGE "shadcn" "eamonxg/luci-theme-shadcn" "main"
 UPDATE_PACKAGE "aurora" "eamonxg/luci-theme-aurora" "master"
 UPDATE_PACKAGE "aurora-config" "eamonxg/luci-app-aurora-config" "master"
@@ -147,5 +147,6 @@ UPDATE_PACKAGE "speedtest-web" "kiddin9/op-packages" "main" "pkg"
 UPDATE_PACKAGE "openlist2" "kiddin9/op-packages" "main" "pkg"
 UPDATE_PACKAGE "luci-app-openlist2" "kiddin9/op-packages" "main" "pkg"
 UPDATE_PACKAGE "luci-app-adguardhome" "kiddin9/op-packages" "main" "pkg"
-
+UPDATE_PACKAGE "luci-theme-argon" "kiddin9/op-packages" "main" "pkg"
+UPDATE_PACKAGE "luci-app-argon-config" "kiddin9/op-packages" "main" "pkg"
 
