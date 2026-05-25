@@ -83,23 +83,23 @@ PATCH_MARKER="/* LUCI_SMOOTH_TRANSITION_PATCH_V1 */"
 # 要追加的 CSS 补丁内容（已做适度换行以提高可读性，不影响CSS解析）
 PATCH_CONTENT=$(cat <<'EOF'
 /* LUCI_SMOOTH_TRANSITION_PATCH_V1 */
-#view > .spinning,#maincontent > .spinning{display:none !important;height:0 !important;opacity:0 !important;pointer-events:none !important}
-@keyframes viewSmoothEnter{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.view-wrapper.view-enter{animation:viewSmoothEnter 0.35s cubic-bezier(0.25,0.46,0.45,0.94) forwards}
-.cbi-section,.table,.cbi-map{transition:height 0.2s ease-out,opacity 0.2s ease-out}
-.table .tr.placeholder .td,.cbi-section-table .tr.placeholder .td{color:transparent !important;background:linear-gradient(90deg,var(--background-color-medium) 25%,var(--background-color-low) 50%,var(--background-color-medium) 75%) !important;background-size:200% 100% !important;anim>
-@keyframes skeleton-pulse{0%{background-position:200% 0}100%{background-position:-200% 0}}
-:root[data-darkmode="true"] .table .tr.placeholder .td,:root[data-darkmode="true"] .cbi-section-table .tr.placeholder .td{background:linear-gradient(90deg,#2a2a2a 25%,#3a3a3a 50%,#2a2a2a 75%) !important;background-size:200% 100% !important}
-@media screen and (min-width:769px){#mainmenu{display:block !important;visibility:visible !important}}
-#mainmenu .nav,#mainmenu .slide-menu{animation:menuFadeIn 0.25s ease-out forwards}
-@keyframes menuFadeIn{from{opacity:0;transform:translateX(-4px)}to{opacity:1;transform:translateX(0)}}
-.main-left{transition:transform 0.3s cubic-bezier(0.4,0,0.2,1),width 0.3s ease !important;visibility:visible !important;opacity:1 !important}
-.main-left .sidenav-header .brand,.main-left .sidenav-header .brand .logo{transition:color 0.4s ease,opacity 0.4s ease,filter 0.4s ease,transform 0.4s ease !important;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-.main-right{scrollbar-gutter:stable;overflow-y:auto}
-.main-right::-webkit-scrollbar{width:10px;background:transparent !important}
-.main-right::-webkit-scrollbar-track{background:transparent !important}
-.main-right::-webkit-scrollbar-thumb{background:var(--primary);border-radius:10px;transition:background-color 0.3s ease}
-.darkMask{transition:opacity 0.3s ease !important}
+#view > .spinning,#maincontent > .spinning {display: none !important;height: 0 !important;opacity: 0 !important;pointer-events: none !important}
+@keyframes viewSmoothEnter {from {opacity: 0;transform: translateY(6px)}to {opacity: 1;transform: translateY(0)}}
+.view-wrapper.view-enter {animation: viewSmoothEnter 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards}
+.cbi-section, .table, .cbi-map {transition: height 0.2s ease-out, opacity 0.2s ease-out}
+.table .tr.placeholder .td,.cbi-section-table .tr.placeholder .td {color: transparent !important;background: linear-gradient(90deg, var(--background-color-medium) 25%, var(--background-color-low) 50%, var(--background-color-medium) 75%) !important;background-size: 200% 100% !important;animation: skeleton-pulse 1.5s infinite ease-in-out !important;border-radius: 4px;min-height: 24px}
+@keyframes skeleton-pulse {0% { background-position: 200% 0}100% { background-position: -200% 0}}
+:root[data-darkmode="true"] .table .tr.placeholder .td,:root[data-darkmode="true"] .cbi-section-table .tr.placeholder .td {background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%) !important;background-size: 200% 100% !important}
+@media screen and (min-width: 769px) {#mainmenu {display: block !important;visibility: visible !important}}
+#mainmenu .nav,#mainmenu .slide-menu {animation: menuFadeIn 0.15s ease-out forwards}
+@keyframes menuFadeIn {from { opacity: 0; transform: translateX(-4px)}to { opacity: 1; transform: translateX(0)}}
+.main-left {transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s ease !important;visibility: visible !important;opacity: 1 !important}
+.main-left .sidenav-header .brand,.main-left .sidenav-header .brand .logo {transition: color 0.4s ease, opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease !important;text-rendering: optimizeLegibility;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale}
+.main-right {scrollbar-gutter: stable;overflow-y: auto}
+.main-right::-webkit-scrollbar {width: 10px;background: transparent !important}
+.main-right::-webkit-scrollbar-track {background: transparent !important}
+.main-right::-webkit-scrollbar-thumb {background: var(--primary);border-radius: 10px;transition: background-color 0.3s ease}
+.darkMask {transition: opacity 0.3s ease !important}
 EOF
 )
 
