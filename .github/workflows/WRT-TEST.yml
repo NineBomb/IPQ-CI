@@ -7,14 +7,13 @@ on:
   workflow_dispatch:
     inputs:
       CONFIG:
-        default: 'IPQ60XX-WIFI-YES'
+        default: 'IPQ60XX-Self'
         required: true
         type: choice
         options:
           - IPQ60XX-WIFI-YES
           - IPQ60XX-WIFI-NO
           - IPQ60XX-Self
-          - TEST
       SOURCE:
         default: 'VIKINGYFY/immortalwrt'
         required: true
