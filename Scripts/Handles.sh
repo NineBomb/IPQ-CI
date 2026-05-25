@@ -1,4 +1,8 @@
+#!/bin/bash
+
 PKG_PATH="$GITHUB_WORKSPACE/wrt/package/"
+
+ls -l 
 
 #预置HomeProxy数据
 if [ -d *"homeproxy"* ]; then
@@ -72,7 +76,7 @@ if [ -f "$RUST_FILE" ]; then
 fi
 #add
 #修复KOD奇怪的依赖问题
-if [ -d *"luci-app-mini-diskmanager"* ]; then
+if [ -d *"luci-app-kodexplorer"* ]; then
 	echo " " && cd ./luci-app-kodexplorer/
 
 	sed -i 's/+php8 \+//' $(find ./luci-app-kodexplorer/ -type f -name "Makefile") 
