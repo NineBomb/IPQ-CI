@@ -150,6 +150,9 @@ jobs:
 
       - name: Custom Packages
         run: |
+        
+          mv $GITHUB_WORKSPACE/Scripts/banner ./wrt/package/base-files/files/etc/banner
+          ls -l ./wrt/package/base-files/files/etc/
           cd ./wrt/package/
 
           $GITHUB_WORKSPACE/Scripts/Packages.sh
