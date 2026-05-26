@@ -210,5 +210,57 @@ with open(filepath, 'w', encoding='utf-8') as f:
 print(f"[OK] 已替换 __init__()")
 PYEOF
 
+# 幂等检查：如果已存在补丁特征字符串，直接跳过
+if grep -qF "env.apply_rollback = 60" "$TARGET"; then
+    echo "[SKIP] 补丁已存在于 $TARGET，无需重复添加。"
+    exit 0
+fi
+
+# 使用 Python3 进行精确插入
+python3 - "$TARGET" <<'PYEOF'
+import sys
+
+filepath = sys.argv[1]
+
+with open(filepath, 'r', encoding='utf-8') as f:
+    content = f.read()
+
+# 1) 定位锚点
+anchor = "Object.assign(env, setenv);"
+anchor_pos = content.find(anchor)
+if anchor_pos == -1:
+    print("[ERROR] 未找到锚点: Object.assign(env, setenv);", file=sys.stderr)
+    sys.exit(1)
+
+# 2) 检测锚点所在行的缩进（兼容 Tab 或空格）
+line_start = content.rfind('\n', 0, anchor_pos) + 1
+indent = ''
+for ch in content[line_start:anchor_pos]:
+    if ch in (' ', '\t'):
+        indent += ch
+    else:
+        break
+
+# 3) 构造要插入的代码块（前后保留空行，与原代码风格一致）
+patch_lines = [
+    "if (typeof env.apply_rollback === 'number') env.apply_rollback = 60;",
+    "if (typeof env.apply_holdoff === 'number')  env.apply_holdoff  = 2;",
+    "if (typeof env.apply_timeout === 'number')  env.apply_timeout  = 10;",
+    "if (typeof env.apply_display === 'number')  env.apply_display  = 1;",
+]
+patch = "\n\n" + "\n".join(indent + line for line in patch_lines) + "\n"
+
+# 4) 在锚点结束位置插入
+insert_pos = anchor_pos + len(anchor)
+new_content = content[:insert_pos] + patch + content[insert_pos:]
+
+# 5) 写回文件
+with open(filepath, 'w', encoding='utf-8') as f:
+    f.write(new_content)
+
+print(f"[OK] 已成功插入 4 行环境参数覆盖代码")
+print(f"     检测到缩进: {repr(indent)}")
+PYEOF
+
 echo "[DONE] 修改完成: $TARGET"
 
