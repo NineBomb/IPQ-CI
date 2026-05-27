@@ -73,9 +73,29 @@ jq 'del(."admin/system/plugins")' ./feeds/luci/modules/luci-mod-system/root/usr/
 # TTYD 免输入用户名
 sed -i '/config ttyd/,/^config/ s|option command .*/bin/login.*|option command '\''/bin/login root'\''|' ./feeds/packages/utils/ttyd/files/ttyd.config
 
-set -euo pipefail
+
 TARGET_CSS="./package/luci-theme-argon/htdocs/luci-static/argon/css/cascade.css"
 TARGET="./feeds/luci/modules/luci-base/htdocs/luci-static/resources/luci.js"
+TARGET_menu_argon="./package/luci-theme-argon/htdocs/luci-static/resources/menu-argon.js"
+
+
+# 检查文件是否存在
+[ ! -f "$TARGET_menu_argon" ] && { echo "[error] 找不到目标文件: $TARGET_menu_argon"; exit 1; }
+# 检查是否已经修复过，防止重复编译时重复注入
+grep -q "核心修复" "$TARGET_menu_argon" && { echo "[warn] menu-argon.js 已修复，跳过注入"; exit 0; }
+
+# 使用 awk 精准注入修复代码 (兼容 GNU/BSD awk，无转义问题)
+awk '!patched && /const currentHeight = element.scrollHeight;/ {
+    print "            // 【核心修复】强制设置为 block，防止 CSS 隐藏导致 scrollHeight 为 0"
+    print "            element.style.display = \"block\";"
+    patched=1
+}
+{print}' "$TARGET_menu_argon" > "$TARGET_menu_argon.tmp" && mv "$TARGET_menu_argon.tmp" "$TARGET_menu_argon"
+echo "[DONE] menu-argon.js 折叠动画 BUG 修复完成"
+
+
+set -euo pipefail
+
 
 # 定义唯一标识注释，用于检测是否已经添加过补丁
 PATCH_MARKER="/* LUCI_SMOOTH_TRANSITION_PATCH_V1 */"
@@ -207,7 +227,7 @@ new_content = content[:start] + new_init + content[end:]
 with open(filepath, 'w', encoding='utf-8') as f:
     f.write(new_content)
 
-print(f"[OK] 已替换 __init__()")
+print(f"[DONE] 已替换 __init__()")
 PYEOF
 
 # 幂等检查：如果已存在补丁特征字符串，直接跳过
