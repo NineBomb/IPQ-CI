@@ -15,9 +15,9 @@ if [ -f "$WIFI_UC" ]; then
 	#修改WIFI密码
 	sed -i "s/key='.*'/key='$WRT_WORD'/g" $WIFI_UC
 	#修改WIFI地区
-	sed -i "s/country='.*'/country='US'/g" $WIFI_UC
+	#sed -i "s/country='.*'/country='US'/g" $WIFI_UC
 	#修改WIFI加密
-	sed -i "s/encryption='.*'/encryption='psk2+ccmp'/g" $WIFI_UC
+	#sed -i "s/encryption='.*'/encryption='psk2+ccmp'/g" $WIFI_UC
 fi
 
 CFG_FILE="./package/base-files/files/bin/config_generate"
