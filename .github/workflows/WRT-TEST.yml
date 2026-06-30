@@ -14,6 +14,7 @@ on:
           - IPQ60XX-WIFI-YES
           - IPQ60XX-WIFI-NO
           - IPQ60XX-Self
+          - TSET
       SOURCE:
         default: 'VIKINGYFY/immortalwrt'
         required: true
